@@ -1,0 +1,31 @@
+GET http://localhost:3000/recipes
+
+###
+
+GET http://localhost:3000/recipes/603e064c46d91f4198fee402
+
+###
+
+DELETE http://localhost:3000/recipes/603e064c46d91f4198fee402
+
+###
+POST http://localhost:3000/recipes
+Content-Type: application/json
+
+{
+    "title": "Lorem Ipsum", 
+    "image": "no image", 
+    "ingredients": [
+        {"name": "Lorem", "amount": "100g"}, 
+        {"name": "Ipsum", "amount": "500ml"}
+    ], 
+    "instructions": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+}
+
+###
+PATCH http://localhost:3000/recipes/603e064c46d91f4198fee402
+Content-Type: application/json
+
+{
+    "title": "Ipsum Lorem 123"
+}
