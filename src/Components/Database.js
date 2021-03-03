@@ -7,10 +7,50 @@ const api = axios.create({
 
 export const getRecipeList = () => {
     return api.get('/')
-    .then((res) => {
-        return res.data;
-    })
-    .catch((err) => {
-        return Promise.reject(err);
-    });
+        .then((res) => {
+            return res.data;
+        })
+        .catch((err) => {
+            return Promise.reject(err);
+        });
 };
+
+export const getRecipe = (id) => {
+    return api.get(`/${id}`)
+        .then((res) => {
+            return res.data;
+        })
+        .catch((err) => {
+            return Promise.reject(err);
+        });
+};
+
+export const editRecipe = (id, recipe) => {
+    return api.patch(`/${id}`, recipe)
+        .then((res) => {
+            return res.data;
+        })
+        .catch((err) => {
+            return Promise.reject(err);
+        });
+}
+
+export const addRecipe = (recipe) => {
+    return api.post(`/`, recipe)
+        .then((res) => {
+            return res.data;
+        })
+        .catch((err) => {
+            return Promise.reject(err);
+        });
+}
+
+export const deleteRecipe = (id) => {
+    return api.delete(`/${id}`)
+        .then((res) => {
+            return res.data;
+        })
+        .catch((err) => {
+            return Promise.reject(err);
+        });
+}

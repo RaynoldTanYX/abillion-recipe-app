@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Card, CardHeader, CardContent, CardMedia, Button } from '@material-ui/core';
 import { Grid, Typography } from '@material-ui/core';
-import { useParams } from 'react-router-dom';
-import { getRecipe, editRecipe, deleteRecipe, addRecipe } from './Database';
+import { addRecipe } from './Database';
 import TextField from '@material-ui/core/TextField';
 import Divider from '@material-ui/core/Divider';
 import { Link } from "react-router-dom";
-import { Skeleton } from '@material-ui/lab';
 
-const EditRecipe = () => {
-    const [recipe, setRecipe] = useState(null);
+const NewRecipe = () => {
+    const [recipe, setRecipe] = useState({
+            title: '', 
+            image: '', 
+            ingredients: [], 
+            instructions: ''
+        });
 
     const SetTitle = (value) => {
         setRecipe({ ...recipe, title: value });
@@ -45,36 +48,22 @@ const EditRecipe = () => {
 
     const HandleSubmit = (event) => {
         event.preventDefault();
-        editRecipe(recipe).then(() => {
-            if (window.alert("Recipe has been edited successfully. Press 'OK' to be redirected to the home page.")) {
-                document.location.href = '/';
+        addRecipe(recipe).then(() => {
+            if (window.alert("Recipe has been created successfully. Press 'OK' to be redirected to the home page."))
+            {
+                window.location.href = '/';
             }
         }).catch((error) => {
-            console.log("Unable to edit recipe")
+            console.log("Unable to create recipe")
             console.log(error);
-            window.alert("Unable to edit recipe. Please try again later.")
+            window.alert("Unable to create recipe. Please try again later.")
         });
-    }
-
-    const HandleDelete = () => {
-        let confirmDelete = window.confirm("Please confirm that you want to delete this recipe");
-        if (confirmDelete === true) {
-            deleteRecipe(recipe._id).then(() => {
-                if (window.alert("Recipe has been deleted successfully. Press 'OK' to be redirected to the home page.")) {
-                    document.location.href = '/';
-                }
-            }).catch((error) => {
-                console.log("Unable to delete recipe")
-                console.log(error);
-                window.alert("Unable to delete recipe. Please try again later.")
-            });
-        }
     }
 
     const RenderRecipeCard = () => {
         return (
             <Card color="secondary">
-                <CardHeader title="Edit recipe" />
+                <CardHeader title="Create recipe" />
                 <CardContent>
                     <form autoComplete="off" onSubmit={HandleSubmit}>
 
@@ -117,12 +106,9 @@ const EditRecipe = () => {
                             justify="flex-end"
                             alignItems="flex-start" spacing={1}>
                             <Grid item>
-                                <Link to={'/'} style={{ textDecoration: "none" }}>
+                                <Link to={'/'} style={{textDecoration:"none"}}>
                                     <Button>Cancel</Button>
                                 </Link>
-                            </Grid>
-                            <Grid item>
-                                <Button onClick={HandleDelete}>Delete</Button>
                             </Grid>
                             <Grid item>
                                 <Button variant="contained" color="primary" type="submit">Submit</Button>
@@ -136,41 +122,16 @@ const EditRecipe = () => {
         );
     }
 
-    const RenderSkeletonCard = () => {
-        return (
-            <Card color="secondary" style={{ width: '500px' }}>
-                <Skeleton variant="text" animation="wave" height={50} />
-                <CardContent>
-                    <Typography variant="body2" align="left">
-                        <Skeleton variant="text" animation="wave" />
-                        <Skeleton variant="text" animation="wave" />
-                        <Skeleton variant="text" animation="wave" />
-                        <Skeleton variant="text" animation="wave" />
-                        <Skeleton variant="text" animation="wave" width={"80%"} />
-                    </Typography>
-                </CardContent>
-            </Card>
-        );
-    }
-
-    let slug = useParams();
-    if (recipe == null) {
-        console.log(slug.recipeId);
-        getRecipe(slug.recipeId).then((res) => {
-            setRecipe(res);
-        });
-    }
-
     return (
         <Grid container
             direction="row"
             justify="center"
             alignItems="stretch">
             <Grid item xs={12} sm={10} md={8} lg={6}>
-                {recipe == null ? RenderSkeletonCard() : RenderRecipeCard()}
+                {RenderRecipeCard()}
             </Grid>
         </Grid>
     );
 }
 
-export default EditRecipe;
+export default NewRecipe;
