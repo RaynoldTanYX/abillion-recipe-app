@@ -1,4 +1,4 @@
-GET http://localhost:3000/recipes
+GET https://raynold-recipe-app-backend.herokuapp.com/recipes
 
 ###
 
