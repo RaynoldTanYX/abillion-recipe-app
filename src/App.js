@@ -32,7 +32,7 @@ function App() {
         <CssBaseline/>
         <Router>
           <Topbar/>
-          <div style={{height:'45px'}}/>
+          <div style={{height:'55px'}}/>
           <Switch>
             <Route path="/view/:recipeId">
               <ViewRecipe/>

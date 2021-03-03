@@ -136,7 +136,7 @@ const EditRecipe = () => {
 
     const RenderSkeletonCard = () => {
         return (
-            <Card color="secondary" style={{ width: '500px' }}>
+            <Card color="secondary">
                 <Skeleton variant="text" animation="wave" height={50} />
                 <CardContent>
                     <Typography variant="body2" align="left">
@@ -161,9 +161,11 @@ const EditRecipe = () => {
 
     return (
         <Grid container
-            direction="row"
-            justify="center"
-            alignItems="stretch">
+        direction="row"
+        justify="center"
+        alignItems="flex-start"
+        spacing={3}
+        style={{ padding: 15 }}>
             <Grid item xs={12} sm={10} md={8} lg={6}>
                 {recipe == null ? RenderSkeletonCard() : RenderRecipeCard()}
             </Grid>

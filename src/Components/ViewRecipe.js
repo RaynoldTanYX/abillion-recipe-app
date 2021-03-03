@@ -59,6 +59,26 @@ const ViewRecipe = () => {
         );
     }
 
+    const RenderSkeletonCard = () => {
+        return (
+            <Card color="secondary">
+                <Skeleton variant="text" animation="wave" height={50} />
+                <CardMedia>
+                    <Skeleton variant="rect" animation="wave" height={250} />
+                </CardMedia>
+                <CardContent>
+                    <Typography variant="body2" align="left">
+                        <Skeleton variant="text" animation="wave" />
+                        <Skeleton variant="text" animation="wave" />
+                        <Skeleton variant="text" animation="wave" />
+                        <Skeleton variant="text" animation="wave" />
+                        <Skeleton variant="text" animation="wave" width={"80%"} />
+                    </Typography>
+                </CardContent>
+            </Card>
+        );
+    }
+
     let slug = useParams();
     if (recipe == null) {
         console.log(slug.recipeId);
@@ -68,15 +88,16 @@ const ViewRecipe = () => {
     }
 
     return (
-        recipe == null ? <div /> :
-            <Grid container
-                direction="row"
-                justify="center"
-                alignItems="stretch">
-                <Grid item xs={12} sm={10} md={8} lg={6}>
-                    {RenderRecipeCard(recipe)}
-                </Grid>
+        <Grid container
+            direction="row"
+            justify="center"
+            alignItems="flex-start"
+            spacing={3}
+            style={{ padding: 15 }}>
+            <Grid item xs={12} sm={10} md={8} lg={6}>
+                {recipe == null ? RenderSkeletonCard() : RenderRecipeCard(recipe)}
             </Grid>
+        </Grid>
     );
 }
 

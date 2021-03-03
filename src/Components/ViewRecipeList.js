@@ -104,7 +104,7 @@ const ViewRecipeList = () => {
                 justify="center"
                 alignItems="flex-start"
                 spacing={3}
-                style={{ padding: 30 }}
+                style={{ padding: 15 }}
             >
                 {
                     recipeList.length === 0
