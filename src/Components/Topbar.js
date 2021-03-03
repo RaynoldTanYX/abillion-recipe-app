@@ -10,7 +10,7 @@ const Topbar = () => {
         <AppBar position="fixed">
             <Toolbar>
                 <Link to="/">
-                    <Button><img src={Logo} alt="Logo"/></Button>
+                    <Button><img src={Logo} alt="Logo" style={{maxWidth:'48px'}}/></Button>
                 </Link>
             </Toolbar>
         </AppBar>
