@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, CardHeader, CardContent, CardMedia, Button } from '@material-ui/core';
+import { Card, CardHeader, CardContent, Button } from '@material-ui/core';
 import { Grid, Typography } from '@material-ui/core';
 import { addRecipe } from './Database';
 import TextField from '@material-ui/core/TextField';

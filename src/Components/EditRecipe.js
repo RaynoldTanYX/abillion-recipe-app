@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Card, CardHeader, CardContent, CardMedia, Button } from '@material-ui/core';
+import React, { useState } from 'react';
+import { Card, CardHeader, CardContent, Button } from '@material-ui/core';
 import { Grid, Typography } from '@material-ui/core';
 import { useParams } from 'react-router-dom';
-import { getRecipe, editRecipe, deleteRecipe, addRecipe } from './Database';
+import { getRecipe, editRecipe, deleteRecipe } from './Database';
 import TextField from '@material-ui/core/TextField';
 import Divider from '@material-ui/core/Divider';
 import { Link } from "react-router-dom";
