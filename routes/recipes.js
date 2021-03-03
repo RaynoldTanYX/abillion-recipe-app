@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
 
 //getting one 
 router.get('/:id', getRecipe, (req, res) => {
-    res.send(res.recipe);
+    res.json(res.recipe);
 })
 
 //creating one
