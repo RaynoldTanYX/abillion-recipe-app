@@ -45,10 +45,9 @@ const EditRecipe = () => {
 
     const HandleSubmit = (event) => {
         event.preventDefault();
-        editRecipe(recipe).then(() => {
-            if (window.alert("Recipe has been edited successfully. Press 'OK' to be redirected to the home page.")) {
-                document.location.href = '/';
-            }
+        editRecipe(recipe._id, recipe).then(() => {
+            window.alert("Recipe has been edited successfully. Press 'OK' to be redirected to the home page.");
+            document.location.href = '/';
         }).catch((error) => {
             console.log("Unable to edit recipe")
             console.log(error);
@@ -60,9 +59,8 @@ const EditRecipe = () => {
         let confirmDelete = window.confirm("Please confirm that you want to delete this recipe");
         if (confirmDelete === true) {
             deleteRecipe(recipe._id).then(() => {
-                if (window.alert("Recipe has been deleted successfully. Press 'OK' to be redirected to the home page.")) {
-                    document.location.href = '/';
-                }
+                window.alert("Recipe has been deleted successfully. Press 'OK' to be redirected to the home page.");
+                document.location.href = '/';
             }).catch((error) => {
                 console.log("Unable to delete recipe")
                 console.log(error);

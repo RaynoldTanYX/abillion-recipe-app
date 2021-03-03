@@ -49,10 +49,8 @@ const NewRecipe = () => {
     const HandleSubmit = (event) => {
         event.preventDefault();
         addRecipe(recipe).then(() => {
-            if (window.alert("Recipe has been created successfully. Press 'OK' to be redirected to the home page."))
-            {
-                window.location.href = '/';
-            }
+            window.alert("Recipe has been created successfully. Press 'OK' to be redirected to the home page.");
+            document.location.href = '/';
         }).catch((error) => {
             console.log("Unable to create recipe")
             console.log(error);
