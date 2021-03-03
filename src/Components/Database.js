@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'https://raynold-recipe-app-backend.herokuapp.com/'
+    baseURL: 'https://raynold-recipe-app-backend.herokuapp.com/recipes'
+    // baseURL: 'http://localhost:3000/recipes'
 });
 
 export const getRecipeList = () => {

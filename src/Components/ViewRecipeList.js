@@ -49,14 +49,14 @@ const ViewRecipeList = () => {
                     {recipeData.image}
                 </CardMedia>
                 <CardContent>
-                    <Typography variant="body1" align="left">
                         <ul>
+                    <Typography variant="body1" align="left">
                             {recipeData.ingredients.map(ingredient => {
                                 return <li>{ingredient.amount + " of " + ingredient.name}</li>
                             })}
+                            </Typography>
                         </ul>
                         {recipeData.instructions}
-                    </Typography>
                 </CardContent>
                 <CardActions>
                     <Link to={'/view/'+recipeData._id}>

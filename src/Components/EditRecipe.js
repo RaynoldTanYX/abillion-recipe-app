@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, CardHeader, CardMedia, CardContent, CardActions } from '@material-ui/core';
-import { Grid, Typography } from '@material-ui/core';
+// import { Card, CardHeader, CardMedia, CardContent, CardActions } from '@material-ui/core';
+// import { Grid, Typography } from '@material-ui/core';
 import { useParams } from 'react-router-dom';
 
 let recipe = [
