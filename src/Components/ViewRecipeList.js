@@ -125,7 +125,7 @@ const ViewRecipeList = () => {
                 }
             </Grid>
             <Link to='/new'>
-                <Fab color="primary" aria-label="add" style={{ position: 'absolute', bottom: '30px', right: '30px' }}>
+                <Fab color="primary" aria-label="add" style={{ position: 'fixed', bottom: '10%', right: '10%' }}>
                     <AddIcon />
                 </Fab>
             </Link>

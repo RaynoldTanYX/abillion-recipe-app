@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 const Topbar = () => {
     return (
-        <AppBar position="static">
+        <AppBar position="fixed">
             <Toolbar>
                 <Link to="/">
                     <Button><img src={Logo} alt="Logo"/></Button>
