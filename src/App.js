@@ -16,11 +16,15 @@ function App() {
   let theme = createMuiTheme({
     palette: {
       type: 'light',
-      primary: green,
-      secondary: orange,
+      primary: {
+        main: '#3F8F83'
+      },
+      secondary: {
+        main: '#948379'
+      },
       background: {
-        paper: orange[300],
-        default: orange[200]
+        paper: '#8FC2BA',
+        default: '#ECFBF3'
       }
     }
   })
