@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent, Button } from '@material-ui/core';
 import { Grid, Typography } from '@material-ui/core';
 import { useParams } from 'react-router-dom';
@@ -13,6 +13,14 @@ const EditRecipe = () => {
 
     const SetTitle = (value) => {
         setRecipe({ ...recipe, title: value });
+    }
+
+    const SetImage = (files) => {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(files[0]);
+        fileReader.onload = (e) => {
+            setRecipe({ ...recipe, image: e.target.result });
+        }
     }
 
     const AddIngredientElement = () => {
@@ -39,18 +47,44 @@ const EditRecipe = () => {
         setRecipe({ ...recipe, ingredients: newIngredients });
     }
 
-    const SetInstructions = (value) => {
-        setRecipe({ ...recipe, instructions: value });
+    const AddInstructionElement = () => {
+        let newInstructions = recipe.instructions;
+        newInstructions.push("");
+        setRecipe({ ...recipe, instructions: newInstructions });
+    }
+
+    const RemoveInstructionElement = (index) => {
+        let newInstructions = recipe.instructions;
+        newInstructions.splice(index, 1);
+        setRecipe({ ...recipe, instructions: newInstructions });
+    }
+
+    const SetInstructionElement = (index, value) => {
+        let newInstructions = [...recipe.instructions];
+        newInstructions[index] = value;
+        setRecipe({ ...recipe, instructions: newInstructions });
     }
 
     const HandleSubmit = (event) => {
         event.preventDefault();
+
+        if (recipe.image === '') {
+            window.alert('Please upload the featured image');
+            return;
+        }
+        if (recipe.ingredients.length === 0) {
+            window.alert('Please list at least one ingredient');
+            return;
+        }
+        else if (recipe.instructions.length === 0) {
+            window.alert('Please list at least one instruction');
+            return;
+        }
         editRecipe(recipe._id, recipe).then(() => {
             window.alert("Recipe has been edited successfully. Press 'OK' to be redirected to the home page.");
             document.location.href = '/';
         }).catch((error) => {
-            console.log("Unable to edit recipe")
-            console.log(error);
+            console.log("Unable to edit recipe", error);
             window.alert("Unable to edit recipe. Please try again later.")
         });
     }
@@ -62,8 +96,7 @@ const EditRecipe = () => {
                 window.alert("Recipe has been deleted successfully. Press 'OK' to be redirected to the home page.");
                 document.location.href = '/';
             }).catch((error) => {
-                console.log("Unable to delete recipe")
-                console.log(error);
+                console.log("Unable to delete recipe", error)
                 window.alert("Unable to delete recipe. Please try again later.")
             });
         }
@@ -76,8 +109,20 @@ const EditRecipe = () => {
                 <CardContent>
                     <form autoComplete="off" onSubmit={HandleSubmit}>
 
-                        <TextField required label="Title" fullWidth value={recipe.title} onChange={(e) => { SetTitle(e.target.value) }} />
+                        <Typography align="left">Title</Typography>
+                        <TextField required fullWidth value={recipe.title} onChange={(e) => { SetTitle(e.target.value) }} />
                         <div style={{ height: "40px" }} />
+
+
+                        <Typography align="left">Featured image</Typography>
+                        {recipe.image === '' ? '' : <img src={recipe.image} style={{ maxWidth: '100%', maxHeight: '250px' }} alt="Uploaded" />}
+                        <div style={{ height: "20px" }} />
+                        <Button variant="outlined" component='label'>
+                            {recipe.image === '' ? 'Upload image' : 'Reupload image'}
+                            <input type='file' accept="image/*" hidden onChange={(e) => SetImage(e.target.files)} />
+                        </Button>
+                        <div style={{ height: "40px" }} />
+
 
                         <Typography align="left">Ingredients</Typography>
                         <Grid container
@@ -103,12 +148,35 @@ const EditRecipe = () => {
                         <Button variant="outlined" onClick={AddIngredientElement}>
                             Add ingredient
                             </Button>
+
+
                         <div style={{ height: "20px" }} />
                         <Divider />
                         <div style={{ height: "20px" }} />
 
 
-                        <TextField required label="Description and Instructions" fullWidth multiline value={recipe.instructions} onChange={(e) => { SetInstructions(e.target.value) }} />
+                        <Typography align="left">Instructions</Typography>
+                        <Grid container
+                            direction="row"
+                            justify="flex-start"
+                            alignItems="flex-end"
+                            spacing={1}
+                        >
+                            {recipe.instructions != null ? recipe.instructions.map((instruction, i) => {
+                                return <React.Fragment key={"instruction" + i}>
+                                    <Grid item xs={12} sm={10}>
+                                        <TextField required label="Instruction" multiline fullWidth value={instruction} onChange={(e) => { SetInstructionElement(i, e.target.value) }} />
+                                    </Grid>
+                                    <Grid item xs={12} sm={1}>
+                                        <Button variant="outlined" onClick={() => RemoveInstructionElement(i)}>Remove</Button>
+                                    </Grid></React.Fragment>
+                            }) : <></>}
+                        </Grid>
+                        <div style={{ height: "20px" }} />
+                        <Button variant="outlined" onClick={AddInstructionElement}>
+                            Add step
+                        </Button>
+
 
                         <div style={{ height: "40px" }} />
                         <Grid container
@@ -152,20 +220,20 @@ const EditRecipe = () => {
     }
 
     let slug = useParams();
-    if (recipe == null) {
-        console.log(slug.recipeId);
+    useEffect(() => {
         getRecipe(slug.recipeId).then((res) => {
             setRecipe(res);
         });
-    }
+    }, [slug.recipeId])
+
 
     return (
         <Grid container
-        direction="row"
-        justify="center"
-        alignItems="flex-start"
-        spacing={3}
-        style={{ padding: 15 }}>
+            direction="row"
+            justify="center"
+            alignItems="flex-start"
+            spacing={3}
+            style={{ padding: 15 }}>
             <Grid item xs={12} sm={10} md={8} lg={6}>
                 {recipe == null ? RenderSkeletonCard() : RenderRecipeCard()}
             </Grid>

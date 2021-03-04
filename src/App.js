@@ -2,7 +2,6 @@
 import './App.css';
 import { createMuiTheme, responsiveFontSizes, ThemeProvider } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
-import { green, orange } from '@material-ui/core/colors';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Topbar from './Components/Topbar.js';
@@ -33,22 +32,22 @@ function App() {
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
-        <CssBaseline/>
+        <CssBaseline />
         <Router>
-          <Topbar/>
-          <div style={{height:'70px'}}/>
+          <Topbar />
+          <div style={{ height: '70px' }} />
           <Switch>
             <Route path="/view/:recipeId">
-              <ViewRecipe/>
+              <ViewRecipe />
             </Route>
             <Route path="/edit/:recipeId">
-              <EditRecipe/>
+              <EditRecipe />
             </Route>
             <Route path="/new">
-              <NewRecipe/>
+              <NewRecipe />
             </Route>
             <Route path="/">
-              <ViewRecipeList/>
+              <ViewRecipeList />
             </Route>
           </Switch>
         </Router>

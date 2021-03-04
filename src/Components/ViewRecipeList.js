@@ -12,26 +12,6 @@ import { Skeleton } from '@material-ui/lab';
 const ViewRecipeList = () => {
 
     const [recipeList, setRecipeList] = useState([
-        // {
-        //     key: 1,
-        //     title: 'Lorem Ipsum', 
-        //     image: 'no image', 
-        //     ingredients: [
-        //         {name: 'Lorem', amount: '100g'}, 
-        //         {name: 'Ipsum', amount: '500ml'}
-        //     ], 
-        //     instructions: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-        // },
-        // {
-        //     key: 2,
-        //     title: 'Lorem Ipsum', 
-        //     image: 'no image', 
-        //     ingredients: [
-        //         {name: 'Lorem', amount: '100g'}, 
-        //         {name: 'Ipsum', amount: '500ml'}
-        //     ], 
-        //     instructions: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-        // }
     ]);
 
     useEffect(() => {
@@ -46,21 +26,8 @@ const ViewRecipeList = () => {
             <Card color="secondary">
                 <CardHeader title={recipeData.title} />
                 <CardMedia>
-                    <Skeleton variant="rect" animation={false} width={"100%"} height={250} />
-                    {/* {recipeData.image} */}
+                    {recipeData.image === "" ? <Skeleton variant="rect" animation={false} width={"100%"} height={250} /> : <img src={recipeData.image} style={{ maxWidth: '100%', maxHeight: '250px' }} alt="Uploaded" />}
                 </CardMedia>
-                <CardContent>
-                    {/* <ul>
-                        <Typography variant="body1" align="left">
-                            {recipeData.ingredients.map(ingredient => {
-                                return <li key={ingredient.name}>{ingredient.amount + " of " + ingredient.name}</li>
-                            })}
-                        </Typography>
-                    </ul> */}
-                    <Typography variant="body2" align="left">
-                        {recipeData.instructions.slice(0, 300) + "..."}
-                    </Typography>
-                </CardContent>
                 <CardActions>
                     <Link to={'/view/' + recipeData._id}>
                         <IconButton color="primary">
