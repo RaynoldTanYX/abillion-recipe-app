@@ -21,10 +21,10 @@ const recipeSchema = new mongoose.Schema({
             }
         }
     ], 
-    instructions: {
+    instructions: [{
         type: String,
         require: true
-    }, 
+    }], 
 })
 
 module.exports = mongoose.model('Recipe', recipeSchema);

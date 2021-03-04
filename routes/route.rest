@@ -23,9 +23,9 @@ Content-Type: application/json
 }
 
 ###
-PATCH http://localhost:3000/recipes/603e064c46d91f4198fee402
+PATCH http://localhost:3000/recipes/603fac092f158300152bec88
 Content-Type: application/json
 
 {
-    "title": "Ipsum Lorem 123"
+    "title": "Broccoli Pizza"
 }
